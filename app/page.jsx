@@ -15,7 +15,7 @@ export default function WelcomePage() {
           </div>
 
           <div className="space-y-4">
-            <Link href="/signin/trainee">
+            <Link href="/trainee/dashboard">
               <Button
                 variant="outline"
                 className="w-full h-12 text-left justify-start border-gray-200 hover:bg-gray-50 bg-transparent mb-4"
@@ -23,7 +23,7 @@ export default function WelcomePage() {
                 Continue as Trainee
               </Button>
             </Link>
-            <Link href="/signin/trainer">
+            <Link href="/trainer/dashboard">
               <Button
                 variant="outline"
                 className="w-full h-12 text-left justify-start border-gray-200 hover:bg-gray-50 bg-transparent mb-4"
@@ -31,7 +31,7 @@ export default function WelcomePage() {
                 Continue as Trainer
               </Button>
             </Link>
-            <Link href="/signin/training-company">
+            <Link href="/training-company/dashboard">
               <Button
                 variant="outline"
                 className="w-full h-12 text-left justify-start border-gray-200 hover:bg-gray-50 bg-transparent"
