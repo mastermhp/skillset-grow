@@ -4,7 +4,7 @@ import { Check, RefreshCw } from "lucide-react";
 
 export default function SpendingHistory() {
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-[#F3F5F9]">
       <TraineeSidebar currentPath="/trainee/spending-history" />
 
       {/* Right side */}
