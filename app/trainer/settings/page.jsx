@@ -3,8 +3,9 @@ import { useState } from "react";
 import TraineeSidebar from "@/components/trainee-sidebar";
 import TraineeHeader from "@/components/trainee-header";
 import { ChevronDown, X } from "lucide-react";
+import TrainerSidebar from "@/components/trainer-sidebar";
 
-export default function TraineeSettings() {
+export default function TrainerSettings() {
   const [notificationSetting, setNotificationSetting] = useState("Enable");
   const [rolesAllow, setRolesAllow] = useState("Trainee");
   const [paymentsAvailable, setPaymentsAvailable] = useState("Card Payment");
@@ -14,12 +15,12 @@ export default function TraineeSettings() {
 
   return (
     <div className="flex min-h-screen bg-[#F3F5F9]">
-      <TraineeSidebar currentPath="/trainee/settings" />
+      <TrainerSidebar currentPath="/trainer/settings" />
 
       <div className="flex-1">
         <TraineeHeader />
 
-        <main className="ml-64 p-8 bg-[#F3F5F9]">
+        <main className="ml-64 p-8 bg-[#F3F5F9] ">
           <div className="flex-1 p-8 bg-white rounded-xl shadow-md">
             <div className="max-w-6xl mx-auto">
               {/* Two Column Layout */}

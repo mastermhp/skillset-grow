@@ -18,14 +18,15 @@ export default function TraineeTrainingCompany() {
           <section className="relative overflow-hidden w-full h-[620px]">
             <div className="absolute inset-0 bg-gradient-to-r from-[#230B34CC] to-[#230B344D] mb-18">
               <img
-              src="/profilebg.jpg"
-              alt="profilebg"
-              className="w-full h-full object-cover"
-            />
+                src="/profilebg.jpg"
+                alt="profilebg"
+                className="w-full h-full object-cover"
+              />
               <div className="absolute  inset-0 bg-gradient-to-r from-[#230B34CC] to-[#230B344D] w-full h-full overflow-hidden"></div>
             </div>
           </section>
 
+          {/* profile description  */}
           <div className="relative z-10 -mt-44 w-full rounded-3xl p-6 h-[200px] mb-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
@@ -37,8 +38,8 @@ export default function TraineeTrainingCompany() {
                   />
                 </div>
                 <div>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <h5 className="font-bold text-[28px] text-white">
+                  <div className="flex items-center space-x-2 mt-24">
+                    <h5 className="font-bold text-[28px] text-black">
                       Company Name
                     </h5>
                     <div className="w-3 h-3 bg-blue-500 rounded-full mt-1 flex items-center justify-center">
@@ -75,7 +76,7 @@ export default function TraineeTrainingCompany() {
                   </div>
                 </div>
               </div>
-              <div className="text-right mr-8">
+              <div className="text-right mr-4 mt-24">
                 <button className="bg-[#4E97FD] w-[150px] h-[50px] hover:bg-gray-800 text-white px-6 py-2.5 rounded-[20px] mb-3 font-medium transition-colors">
                   Favorite
                 </button>
@@ -84,7 +85,7 @@ export default function TraineeTrainingCompany() {
           </div>
 
           {/* Trainers Section */}
-          <div className="px-6 mb-8">
+          <div className="px-6 mb-8 mt-20">
             <div className="flex items-center mb-4">
               <h2 className="text-[30px] font-medium mr-4">Trainers</h2>
               <div className="flex-1 h-px bg-gray-300"></div>
@@ -210,7 +211,7 @@ export default function TraineeTrainingCompany() {
           </div>
 
           {/* Videos Section */}
-          <div className="px-6 mb-8">
+          <div className="px-6 mb-8 mt-20">
             <div className="flex items-center mb-4">
               <h2 className="text-[30px] font-medium mr-4">Videos</h2>
               <div className="flex-1 h-px bg-gray-300"></div>

@@ -1,51 +1,74 @@
-import TrainerSidebar from "@/components/trainer-sidebar"
-import TraineeHeader from "@/components/trainee-header"
-import { Card } from "@/components/ui/card"
-import { Star } from "lucide-react"
+import TrainerSidebar from "@/components/trainer-sidebar";
+import TraineeHeader from "@/components/trainee-header";
+import { Eye, ChevronLeft, ChevronRight, Star } from "lucide-react"
 
 export default function TrainerReviews() {
-  const reviews = [
+  const reviewsData = [
     {
-      id: 1,
-      name: "John Smith",
-      username: "@johnsmith",
+      name: "Video Call",
+      customer: "Nathan Clark",
+      comment: "But I must explain to you how all this of denouncing pleasure.",
       rating: 5,
-      comment:
-        "Excellent trainer! Very knowledgeable and patient. Highly recommend for anyone looking to improve their skills.",
-      date: "2 days ago",
-      avatar: "/user-profile-illustration.png",
     },
     {
-      id: 2,
-      name: "Sarah Johnson",
-      username: "@sarahjohnson",
-      rating: 4,
-      comment: "Great experience overall. The training sessions were well structured and informative.",
-      date: "1 week ago",
-      avatar: "/user-profile-illustration.png",
-    },
-    {
-      id: 3,
-      name: "Mike Wilson",
-      username: "@mikewilson",
+      name: "Video Call",
+      customer: "Ollie Casper",
+      comment: "But I must explain to you how all this of denouncing pleasure.",
       rating: 5,
-      comment: "Outstanding trainer! Really helped me understand complex concepts in a simple way.",
-      date: "2 weeks ago",
-      avatar: "/user-profile-illustration.png",
     },
     {
-      id: 4,
-      name: "Emily Davis",
-      username: "@emilydavis",
+      name: "Video Purchased",
+      customer: "Ken Matthews",
+      comment: "But I must explain to you how all this of denouncing pleasure.",
+      rating: 3,
+    },
+    {
+      name: "Video Purchased",
+      customer: "Bruce Reynolds",
+      comment: "But I must explain to you how all this of denouncing pleasure.",
+      rating: 5,
+    },
+    {
+      name: "Video Call",
+      customer: "Gage Pequette",
+      comment: "But I must explain to you how all this of denouncing pleasure.",
+      rating: 5,
+    },
+    {
+      name: "Video Purchased",
+      customer: "Zachary Taylor",
+      comment: "But I must explain to you how all this of denouncing pleasure.",
       rating: 4,
-      comment: "Very professional and helpful. Would definitely book another session.",
-      date: "3 weeks ago",
-      avatar: "/user-profile-illustration.png",
+    },
+    {
+      name: "Video Call",
+      customer: "Zach Marshall",
+      comment: "But I must explain to you how all this of denouncing pleasure.",
+      rating: 4,
+    },
+    {
+      name: "Video Call",
+      customer: "Tony Richardson",
+      comment: "But I must explain to you how all this of denouncing pleasure.",
+      rating: 5,
     },
   ]
 
-  const averageRating = 4.5
-  const totalReviews = reviews.length
+  const renderStars = (rating) => {
+    return (
+      <div className="flex items-center space-x-1">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <Star
+            key={star}
+            className={`w-4 h-4 ${star <= rating ? "fill-yellow-400 text-yellow-400" : "fill-gray-300 text-gray-300"}`}
+          />
+        ))}
+      </div>
+    )
+  }
+
+  // const averageRating = 4.5;
+  // const totalReviews = reviews.length;
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -54,62 +77,82 @@ export default function TrainerReviews() {
       <div className="flex-1">
         <TraineeHeader />
 
-        <main className="p-6">
-          <div className="mb-6">
-            <h1 className="text-2xl font-semibold">Reviews</h1>
-            <div className="flex items-center space-x-4 mt-2">
-              <div className="flex items-center">
-                <div className="flex items-center space-x-1">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star
-                      key={star}
-                      className={`w-5 h-5 ${star <= averageRating ? "text-yellow-400 fill-current" : "text-gray-300"}`}
-                    />
-                  ))}
-                </div>
-                <span className="ml-2 text-lg font-semibold">{averageRating}</span>
-              </div>
-              <span className="text-gray-600">({totalReviews} reviews)</span>
-            </div>
-          </div>
+        <main className="ml-64 p-6">
+          <div className="flex-1 flex flex-col">
+            
 
-          <div className="space-y-4">
-            {reviews.map((review) => (
-              <Card key={review.id} className="p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full flex-shrink-0">
-                    <img
-                      src={review.avatar || "/placeholder.svg"}
-                      alt={review.name}
-                      className="w-full h-full object-cover rounded-full"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <div>
-                        <h3 className="font-semibold">{review.name}</h3>
-                        <p className="text-sm text-gray-600">{review.username}</p>
-                      </div>
-                      <span className="text-sm text-gray-500">{review.date}</span>
-                    </div>
-                    <div className="flex items-center space-x-1 mb-3">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star
-                          key={star}
-                          className={`w-4 h-4 ${
-                            star <= review.rating ? "text-yellow-400 fill-current" : "text-gray-300"
-                          }`}
-                        />
+            {/* Reviews Content */}
+            <div className="flex-1 p-6">
+              <h1 className="text-2xl font-semibold text-gray-900 mb-8">
+                Trainers Reviews
+              </h1>
+
+              {/* Reviews Table */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gray-50 border-b border-gray-200">
+                      <tr>
+                        <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                          Name
+                        </th>
+                        <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                          Customer
+                        </th>
+                        <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                          Comment
+                        </th>
+                        <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                          Rating
+                        </th>
+                        <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                          Action
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {reviewsData.map((review, index) => (
+                        <tr key={index} className="hover:bg-gray-50">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {review.name}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {review.customer}
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-900 max-w-md">
+                            {review.comment}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            {renderStars(review.rating)}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <button className="text-gray-400 hover:text-gray-600">
+                              <Eye className="w-5 h-5" />
+                            </button>
+                          </td>
+                        </tr>
                       ))}
-                    </div>
-                    <p className="text-gray-700">{review.comment}</p>
-                  </div>
+                    </tbody>
+                  </table>
                 </div>
-              </Card>
-            ))}
+              </div>
+
+              {/* Pagination */}
+              <div className="flex items-center justify-center mt-8 space-x-2">
+                <button className="p-2 border border-[#4e97fd] text-[#4e97fd] rounded-full hover:text-gray-600 hover:border-gray-400" disabled>
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button className="w-8 h-8 rounded-full border border-[#4e97fd] text-[#4e97fd] text-sm font-medium">
+                  1
+                </button>
+                <button className="p-2 rounded-full border border-[#4e97fd] text-[#4e97fd] hover:text-gray-600 hover:border-gray-400" disabled>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
           </div>
         </main>
       </div>
     </div>
-  )
+  );
 }

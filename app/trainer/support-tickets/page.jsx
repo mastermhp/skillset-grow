@@ -1,10 +1,10 @@
-import TraineeSidebar from "@/components/trainee-sidebar"
 import TraineeHeader from "@/components/trainee-header"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Edit, Trash2 } from "lucide-react"
+import TrainerSidebar from "@/components/trainer-sidebar"
 
-export default function TraineeSupportTickets() {
+export default function TrainerSupportTickets() {
   const tickets = [
     { id: 1, info: "How much do I have to pay for...", type: "Normal", date: "10 April, 2022", title: "UX Problem" },
     { id: 2, info: "Cannot book call", type: "Urgent", date: "13 April, 2022", title: "Website Problem" },
@@ -19,7 +19,7 @@ export default function TraineeSupportTickets() {
 
   return (
     <div className="flex min-h-screen bg-[#F3F5F9]">
-      <TraineeSidebar currentPath="/trainee/support-tickets" />
+      <TrainerSidebar currentPath="/trainer/support-tickets" />
 
       <div className="flex-1">
         <TraineeHeader />

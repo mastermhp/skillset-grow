@@ -1,11 +1,11 @@
-import TraineeSidebar from "@/components/trainee-sidebar";
 import TraineeHeader from "@/components/trainee-header";
 import { Check, RefreshCw } from "lucide-react";
+import TrainerSidebar from "@/components/trainer-sidebar";
 
-export default function TraineeSpendingHistory() {
+export default function TrainerSpendingHistory() {
   return (
     <div className="flex min-h-screen bg-[#F3F5F9]">
-      <TraineeSidebar currentPath="/trainee/spending-history" />
+      <TrainerSidebar currentPath="/trainer/spending-history" />
 
       {/* Right side */}
       <div className="flex-1 flex flex-col">
@@ -17,53 +17,13 @@ export default function TraineeSpendingHistory() {
           <div className="flex min-h-screen bg-[#F3F5F9]">
             {/* Main Content */}
             <div className="flex-1 flex flex-col">
-              
               {/* Main Content Area */}
               <div className="flex-1 p-8">
-                {/* Welcome Section */}
-                <div className="mb-8 bg-white shadow-md p-8 rounded-md">
-                  <h1 className="text-2xl font-medium text-blue-500 mb-2">
-                    Good Morning, Maruf!
-                  </h1>
-                  <p className="text-gray-500 text-sm mb-6">
-                    Stats of the till now
-                  </p>
-
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-6">
-                      <div>
-                        <div className="text-4xl font-bold text-gray-900 mb-1">
-                          523
-                        </div>
-                        <div className="text-gray-500 text-sm">Total Calls</div>
-                      </div>
-
-                      <div>
-                        <div className="text-4xl font-bold text-gray-900 mb-1">
-                          $1,360.66
-                        </div>
-                        <div className="text-gray-500 text-sm">
-                          Total Amount Spent
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Illustration */}
-                    <div className="flex-shrink-0">
-                      <img
-                        src="/welcome.svg"
-                        alt="Person with mobile and shopping bags"
-                        className="w-80 h-48 object-contain"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Recent Purchases Section */}
+                {/* Recent Earnings Section */}
                 <div>
                   <div className="flex items-center justify-between bg-white p-8 rounded-t-md">
                     <h2 className="text-xl font-semibold text-gray-900">
-                      Recent Purchases
+                      Recent Earnings
                     </h2>
                     <button className="text-blue-500 text-sm font-medium px-4 py-2 border border-blue-200 rounded-lg hover:bg-blue-50">
                       All Orders
@@ -79,10 +39,7 @@ export default function TraineeSpendingHistory() {
                             Order ID
                           </th>
                           <th className="px-8 py-4 text-left text-[16px] font-semibold text-gray-500 uppercase tracking-wider">
-                            Type
-                          </th>
-                          <th className="px-8 py-4 text-left text-[16px] font-semibold text-gray-500 uppercase tracking-wider">
-                            Person
+                            Month
                           </th>
                           <th className="px-8 py-4 text-left text-[16px] font-semibold text-gray-500 uppercase tracking-wider">
                             Payment
@@ -98,10 +55,7 @@ export default function TraineeSpendingHistory() {
                             #6d3wedo5
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            Video Call
-                          </td>
-                          <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            John Smith
+                            January
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -118,10 +72,7 @@ export default function TraineeSpendingHistory() {
                             #6d3wedo6
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            Video
-                          </td>
-                          <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            Smith Kelin
+                            January
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
@@ -138,10 +89,7 @@ export default function TraineeSpendingHistory() {
                             #6d3wedo5
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            Video Call
-                          </td>
-                          <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            John Smith
+                            January
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -158,10 +106,7 @@ export default function TraineeSpendingHistory() {
                             #6d3wedo6
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            Video
-                          </td>
-                          <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            Smith Kelin
+                            January
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
@@ -178,10 +123,7 @@ export default function TraineeSpendingHistory() {
                             #6d3wedo5
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            Video Call
-                          </td>
-                          <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            John Smith
+                            January
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -198,10 +140,7 @@ export default function TraineeSpendingHistory() {
                             #6d3wedo6
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            Video
-                          </td>
-                          <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-600">
-                            Smith Kelin
+                            January
                           </td>
                           <td className="px-8 py-4 whitespace-nowrap">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
