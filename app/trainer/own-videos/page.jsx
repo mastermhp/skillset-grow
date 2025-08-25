@@ -1,10 +1,10 @@
-import TraineeSidebar from "@/components/trainee-sidebar";
 import TraineeHeader from "@/components/trainee-header";
+import TrainerSidebar from "@/components/trainer-sidebar";
 
-export default function TraineeOwnVideos() {
+export default function TrainerOwnVideos() {
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <TraineeSidebar currentPath="/trainee/own-videos" />
+      <TrainerSidebar currentPath="/trainer/own-videos" />
 
       {/* Right side */}
       <div className="flex-1 flex flex-col">
@@ -16,7 +16,7 @@ export default function TraineeOwnVideos() {
           {/* Purchased Section */}
           <div className="px-6 mb-8">
             <div className="flex items-center mb-4">
-              <h2 className="text-[30px] font-medium mr-4">Purchased</h2>
+              <h2 className="text-[30px] font-medium mr-4">Uploaded Videos</h2>
               <div className="flex-1 h-px bg-gray-300"></div>
             </div>
           </div>

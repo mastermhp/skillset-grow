@@ -1,8 +1,8 @@
-import TrainerSidebar from "@/components/trainer-sidebar"
-import TraineeHeader from "@/components/trainee-header"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Play, Users } from "lucide-react"
+import TrainerSidebar from "@/components/trainer-sidebar";
+import TraineeHeader from "@/components/trainee-header";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Play, Users, Video } from "lucide-react";
 
 export default function TrainerDashboard() {
   return (
@@ -12,109 +12,472 @@ export default function TrainerDashboard() {
       <div className="flex-1">
         <TraineeHeader />
 
-        <main className="p-6">
-          {/* Hero Section with Guitar Background */}
-          <div className="relative bg-gradient-to-r from-purple-900 to-indigo-900 rounded-xl p-8 text-white mb-8 overflow-hidden">
-            <div className="absolute inset-0">
+        <main className="ml-64 p-6">
+          {/* profile section  */}
+          <section className="relative overflow-hidden w-full h-[620px]">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#230B34CC] to-[#230B344D] mb-18">
               <img
-                src="/guitar-background.png"
-                alt="Guitar background"
-                className="w-full h-full object-cover opacity-30"
+                src="/profilebg.jpg"
+                alt="profilebg"
+                className="w-full h-full object-cover"
               />
+              <div className="absolute  inset-0 bg-gradient-to-r from-[#230B34CC] to-[#230B344D] w-full h-full overflow-hidden"></div>
             </div>
-            <div className="relative z-10">
-              <div className="flex items-center space-x-4 mb-6">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+          </section>
+
+          {/* profile description  */}
+          <div className="relative z-10 -mt-44 w-full rounded-3xl p-6 h-[200px] mb-8">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className="w-[150px] h-[150px] p-2 rounded-full overflow-hidden border-2 border-gray-400">
                   <img
-                    src="/trainer-profile.png"
-                    alt="Company Profile"
-                    className="w-full h-full object-cover rounded-full"
+                    src="/thomas-hope-profile.png"
+                    alt="Thomas Hope"
+                    className="w-full h-full rounded-full object-cover"
                   />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold">Company Name</h2>
-                  <p className="text-white/80">@company</p>
-                  <div className="flex items-center space-x-4 text-sm mt-1">
-                    <span className="flex items-center">
-                      <Users className="w-4 h-4 mr-1" />
-                      200K Viewers
-                    </span>
-                    <span className="flex items-center">
-                      <Play className="w-4 h-4 mr-1" />
-                      300 Videos
-                    </span>
+                  <div className="flex items-center space-x-2 mt-24">
+                    <h5 className="font-bold text-[28px] text-black">
+                      Company Name
+                    </h5>
+                    <div className="w-3 h-3 bg-blue-500 rounded-full mt-1 flex items-center justify-center">
+                      <svg
+                        className="w-2 h-2 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-6">
+                    <p className="text-black text-[18px]">
+                      <span className="italic">@</span>thomashope
+                    </p>
+                    <div className="flex items-center space-x-1">
+                      <Users className="w-4 h-4 text-black text-[18px]" />
+                      <span className="text-black text-[18px] font-medium">
+                        200K Trainees
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Video className="w-4 h-4 text-black text-[18px]" />
+                      <span className="text-black text-[18px] font-medium">
+                        300 Videos
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <div className="ml-auto">
-                  <Button className="bg-[#4e97fd] hover:bg-[#3b82f6]">Favorite</Button>
-                </div>
+              </div>
+              <div className="text-right mr-4 mt-28">
+                <button className="border-[#000000] border-1 w-[250px] h-[50px] hover:bg-gray-800 text-black px-6 py-2.5 rounded-[20px] mb-3 font-medium transition-colors">
+                  UPLOAD NEW VIDEO
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Trainers Section */}
-          <div className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">Trainers</h2>
-            <div className="space-y-4">
-              {[1, 2].map((i) => (
-                <Card key={i} className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gray-300 rounded-full">
-                        <img
-                          src="/trainer-profile.png"
-                          alt="Thomas Hope"
-                          className="w-full h-full object-cover rounded-full"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold">Thomas Hope</h3>
-                        <p className="text-sm text-gray-600">@thomashope</p>
-                        <div className="flex items-center text-sm text-gray-500 mt-1">
-                          <Users className="w-4 h-4 mr-1" />
-                          200K Trainees
-                          <Play className="w-4 h-4 ml-3 mr-1" />
-                          300 Videos
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold">$40</div>
-                      <Button className="bg-[#2b3445] hover:bg-[#374151] mt-2">Book Call</Button>
-                    </div>
-                  </div>
-                </Card>
+          {/* Category Filters */}
+          <div className="px-6 mb-6 mt-20">
+            <div className="flex space-x-4 overflow-x-auto">
+              {[
+                "Home",
+                "About",
+                "Trainers",
+                "Videos",
+              ].map((category, index) => (
+                <button
+                  key={category}
+                  className={`px-5 py-3 rounded-[12px] text-md font-semibold whitespace-nowrap ${
+                    index === 0
+                      ? "bg-gray-800 text-white"
+                      : "text-gray-700 hover:bg-gray-300"
+                  }`}
+                >
+                  {category}
+                </button>
               ))}
             </div>
           </div>
 
-          {/* Videos Grid */}
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Videos</h2>
-            <div className="grid grid-cols-4 gap-4">
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                <Card key={i} className="p-0 overflow-hidden">
-                  <div className="relative">
-                    <img src="/skateboard-tutorial-video.png" alt={`Video ${i}`} className="w-full h-32 object-cover" />
-                    <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                      $14
+          {/* Course Grid */}
+          <div className="px-6 mb-8">
+            <div className="grid grid-cols-4 gap-8 mb-8">
+              {[
+                {
+                  title: "Learn the basics of the Coding in 7 min?",
+                  instructor: "Andy William",
+                  views: "53k views",
+                  time: "2 weeks ago",
+                  duration: "7 min",
+                  image: "/dash1.jpg",
+                  price: null,
+                },
+                {
+                  title: "Learn the basics of the Coding in 7 min?",
+                  instructor: "Johny Wise",
+                  views: "100k views",
+                  time: "2 weeks ago",
+                  duration: "7 min",
+                  image: "/dash2.jpg",
+                  price: "$24",
+                },
+                {
+                  title: "Learn to playing chess only in 7 min",
+                  instructor: "Budi Hakim",
+                  views: "1.5M views",
+                  time: "2 weeks ago",
+                  duration: "7 min",
+                  image: "/dash3.png",
+                  price: "$24",
+                },
+                {
+                  title: "Learn to playing chess only in 7 min",
+                  instructor: "Wijaya Abadi",
+                  views: "643k views",
+                  time: "2 weeks ago",
+                  duration: "7 min",
+                  image: "/dash4.jpg",
+                  price: null,
+                },
+                {
+                  title: "Learn the basics of the Coding in 7 min?",
+                  instructor: "Andy William",
+                  views: "53k views",
+                  time: "2 weeks ago",
+                  duration: "7 min",
+                  image: "/dash1.jpg",
+                  price: null,
+                },
+                {
+                  title: "Learn the basics of the Coding in 7 min?",
+                  instructor: "Johny Wise",
+                  views: "100k views",
+                  time: "2 weeks ago",
+                  duration: "7 min",
+                  image: "/dash2.jpg",
+                  price: "$24",
+                },
+                {
+                  title: "Learn to playing chess only in 7 min",
+                  instructor: "Budi Hakim",
+                  views: "1.5M views",
+                  time: "2 weeks ago",
+                  duration: "2 min",
+                  image: "/dash3.png",
+                  price: "$24",
+                },
+                {
+                  title: "Learn to playing chess only in 7 min",
+                  instructor: "Wijaya Abadi",
+                  views: "643k views",
+                  time: "2 weeks ago",
+                  duration: "2 min",
+                  image: "/dash4.jpg",
+                  price: null,
+                },
+              ].map((course, index) => (
+                <div
+                  key={index}
+                  className="h-[420px] bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200"
+                >
+                  <div className="relative w-full h-56">
+                    <img
+                      src={course.image || "/placeholder.svg"}
+                      alt={course.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-2 right-2 bg-black/40 bg-opacity-50 text-white px-2 py-1 rounded-full text-xs">
+                      {course.duration}
                     </div>
-                    <Button size="sm" className="absolute top-2 left-2 bg-black/70 hover:bg-black/80">
-                      <Play className="w-3 h-3" />
-                    </Button>
-                  </div>
-                  <div className="p-3">
-                    <h3 className="font-medium text-sm mb-1">Learn the basics of the Coding in 7 min</h3>
-                    <div className="flex items-center text-xs text-gray-500">
-                      <Play className="w-3 h-3 mr-1" />7 min • 2 weeks ago
+                    <div className="absolute -bottom-7 right-6 w-[70px] h-[70px] border-2 p-1 border-white rounded-full flex items-center justify-center">
+                      <div className="w-full h-full rounded-full flex items-center justify-center">
+                        <img
+                          src="/dashbrand.png"
+                          alt={course.title}
+                          className="w-full h-full rounded-full"
+                        />
+                      </div>
+                    </div>
+                    <div className="absolute -bottom-7 right-6 rounded-full flex items-center justify-center">
+                      <img
+                        src="/verificationBadge.png"
+                        alt="verificationBadge"
+                        className="w-[18px] h-[18px] rounded-full"
+                      />
                     </div>
                   </div>
-                </Card>
+                  <div className="p-8 bg-[#2B3445] w-full h-full">
+                    <div className="flex items-center space-x-2 mb-4">
+                      <span className="text-[16px] leading-[14px] text-[#B7B9D2]">
+                        {course.instructor}
+                      </span>
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    </div>
+                    <div className="flex items-start justify-between mb-8">
+                      <h3 className="text-[24px] w-[70%] leading-[24px] font-medium text-[#FFFFFF] line-clamp-2">
+                        {course.title}
+                      </h3>
+                    </div>
+                    <div className="flex items-start justify-between mb-8">
+                      <p className="text-[15px] text-[#808191]">
+                        {course.views} • {course.time}
+                      </p>
+                      {course.price && (
+                        <span className="text-[15px] leading-[18px] font-bold text-[#FFFFFF] ml-2">
+                          {course.price}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
               ))}
+            </div>
+          </div>
+
+          {/* Trainees Section */}
+          <div className="px-6 mb-8 mt-20">
+            <div className="flex items-center mb-4">
+              <h2 className="text-[30px] font-medium mr-4">Trainers</h2>
+              <div className="flex-1 h-px bg-gray-300"></div>
+            </div>
+            
+            {/* trainers card  */}
+            <div className="rounded-3xl border-2 border-gray-300 p-6 shadow-sm h-[200px] mb-10">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="w-[150px] h-[150px] p-2 rounded-full overflow-hidden border-2 border-gray-400">
+                    <img
+                      src="/thomas-hope-profile.png"
+                      alt="Thomas Hope"
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <div className="flex items-center space-x-2 mb-1">
+                      <h5 className="font-bold text-[28px] text-black">
+                        Thomas Hope
+                      </h5>
+                      <div className="w-3 h-3 bg-blue-500 rounded-full mt-1 flex items-center justify-center">
+                        <svg
+                          className="w-2 h-2 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center space-x-6">
+                      <p className="text-black text-[18px]"><span className="italic">@</span>thomashope</p>
+                      <div className="flex items-center space-x-1">
+                        <Users className="w-4 h-4 text-black text-[18px]" />
+                        <span className="text-black text-[18px] font-medium">
+                          200K Trainees
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Video className="w-4 h-4 text-black text-[18px]" />
+                        <span className="text-black text-[18px] font-medium">
+                          300 Videos
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <button className="bg-[#2B3445] h-[50px] hover:bg-gray-800 text-white px-6 py-2.5 rounded-[20px] mb-3 font-medium transition-colors">
+                    Book Call
+                  </button>
+                  <p className="text-2xl font-bold text-center text-black">$40</p>
+                </div>
+              </div>
+            </div>
+
+            {/* trainers card  */}
+            <div className="rounded-3xl border-2 border-gray-300 p-6 shadow-sm h-[200px] mb-10">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="w-[150px] h-[150px] p-2 rounded-full overflow-hidden border-2 border-gray-400">
+                    <img
+                      src="/thomas-hope-profile.png"
+                      alt="Thomas Hope"
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <div className="flex items-center space-x-2 mb-1">
+                      <h5 className="font-bold text-[28px] text-black">
+                        Thomas Hope
+                      </h5>
+                      <div className="w-3 h-3 bg-blue-500 rounded-full mt-1 flex items-center justify-center">
+                        <svg
+                          className="w-2 h-2 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center space-x-6">
+                      <p className="text-black text-[18px]"><span className="italic">@</span>thomashope</p>
+                      <div className="flex items-center space-x-1">
+                        <Users className="w-4 h-4 text-black text-[18px]" />
+                        <span className="text-black text-[18px] font-medium">
+                          200K Trainees
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Video className="w-4 h-4 text-black text-[18px]" />
+                        <span className="text-black text-[18px] font-medium">
+                          300 Videos
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <button className="bg-[#2B3445] h-[50px] hover:bg-gray-800 text-white px-6 py-2.5 rounded-[20px] mb-3 font-medium transition-colors">
+                    Book Call
+                  </button>
+                  <p className="text-2xl font-bold text-center text-black">$40</p>
+                </div>
+              </div>
+            </div>
+
+            {/* trainers card  */}
+            <div className="rounded-3xl border-2 border-gray-300 p-6 shadow-sm h-[200px] mb-10">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="w-[150px] h-[150px] p-2 rounded-full overflow-hidden border-2 border-gray-400">
+                    <img
+                      src="/thomas-hope-profile.png"
+                      alt="Thomas Hope"
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <div className="flex items-center space-x-2 mb-1">
+                      <h5 className="font-bold text-[28px] text-black">
+                        Thomas Hope
+                      </h5>
+                      <div className="w-3 h-3 bg-blue-500 rounded-full mt-1 flex items-center justify-center">
+                        <svg
+                          className="w-2 h-2 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center space-x-6">
+                      <p className="text-black text-[18px]"><span className="italic">@</span>thomashope</p>
+                      <div className="flex items-center space-x-1">
+                        <Users className="w-4 h-4 text-black text-[18px]" />
+                        <span className="text-black text-[18px] font-medium">
+                          200K Trainees
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Video className="w-4 h-4 text-black text-[18px]" />
+                        <span className="text-black text-[18px] font-medium">
+                          300 Videos
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <button className="bg-[#2B3445] h-[50px] hover:bg-gray-800 text-white px-6 py-2.5 rounded-[20px] mb-3 font-medium transition-colors">
+                    Book Call
+                  </button>
+                  <p className="text-2xl font-bold text-center text-black">$40</p>
+                </div>
+              </div>
+            </div>
+
+            {/* trainers card  */}
+            <div className="rounded-3xl border-2 border-gray-300 p-6 shadow-sm h-[200px] mb-10">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="w-[150px] h-[150px] p-2 rounded-full overflow-hidden border-2 border-gray-400">
+                    <img
+                      src="/thomas-hope-profile.png"
+                      alt="Thomas Hope"
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <div className="flex items-center space-x-2 mb-1">
+                      <h5 className="font-bold text-[28px] text-black">
+                        Thomas Hope
+                      </h5>
+                      <div className="w-3 h-3 bg-blue-500 rounded-full mt-1 flex items-center justify-center">
+                        <svg
+                          className="w-2 h-2 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center space-x-6">
+                      <p className="text-black text-[18px]"><span className="italic">@</span>thomashope</p>
+                      <div className="flex items-center space-x-1">
+                        <Users className="w-4 h-4 text-black text-[18px]" />
+                        <span className="text-black text-[18px] font-medium">
+                          200K Trainees
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Video className="w-4 h-4 text-black text-[18px]" />
+                        <span className="text-black text-[18px] font-medium">
+                          300 Videos
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <button className="bg-[#2B3445] h-[50px] hover:bg-gray-800 text-white px-6 py-2.5 rounded-[20px] mb-3 font-medium transition-colors">
+                    Book Call
+                  </button>
+                  <p className="text-2xl font-bold text-center text-black">$40</p>
+                </div>
+              </div>
             </div>
           </div>
         </main>
       </div>
     </div>
-  )
+  );
 }

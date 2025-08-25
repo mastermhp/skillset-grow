@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 export default function TrainerSignIn() {
   return (
@@ -18,14 +18,24 @@ export default function TrainerSignIn() {
               <Label htmlFor="email" className="text-sm text-gray-700">
                 Email
               </Label>
-              <Input id="email" type="email" placeholder="Enter your email" className="h-12 border-gray-200" />
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                className="h-12 border-gray-200"
+              />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="password" className="text-sm text-gray-700">
                 Password
               </Label>
-              <Input id="password" type="password" placeholder="Enter your password" className="h-12 border-gray-200" />
+              <Input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                className="h-12 border-gray-200"
+              />
             </div>
 
             <div className="flex items-center justify-between">
@@ -39,14 +49,20 @@ export default function TrainerSignIn() {
                 Forgot Password?
               </Link>
             </div>
-
-            <Button className="w-full h-12 bg-[#2b3445] hover:bg-[#374151] text-white">Sign In</Button>
+            <Link href="/trainer/dashboard">
+              <Button className="w-full h-12 bg-[#2b3445] hover:bg-[#374151] text-white">
+                Sign In
+              </Button>
+            </Link>
           </form>
 
           <div className="text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{" "}
-              <Link href="/signup/trainer" className="text-[#4e97fd] hover:underline">
+              <Link
+                href="/signup/trainer"
+                className="text-[#4e97fd] hover:underline"
+              >
                 Sign up
               </Link>
             </p>
@@ -83,5 +99,5 @@ export default function TrainerSignIn() {
         </div>
       </div>
     </div>
-  )
+  );
 }

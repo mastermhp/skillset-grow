@@ -28,7 +28,7 @@ const additionalNav = [
 
 export default function TrainerSidebar({ currentPath = "/trainer/dashboard" }) {
   return (
-    <div className="w-64 bg-[#2b3445] min-h-screen flex flex-col">
+    <div className="fixed left-0 top-0 h-screen w-64 bg-[#2b3445] flex flex-col">
       {/* Logo */}
       <div className="p-6 border-b border-gray-600">
         <h1 className="text-white font-bold text-lg">SKILLSETGROW</h1>
