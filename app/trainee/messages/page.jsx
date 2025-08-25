@@ -112,7 +112,7 @@ export default function TraineeMessages() {
         <TraineeHeader className="h-16" />
 
         {/* Main content -> screen - header */}
-        <main className="flex-1 p-6 overflow-hidden">
+        <main className="ml-64 flex-1 p-6 overflow-hidden">
           <div className="flex gap-8 h-full">
             {/* Messages List */}
             <div className="w-80 h-full bg-white border-2 border-[#0000004D] rounded-[30px] flex flex-col">

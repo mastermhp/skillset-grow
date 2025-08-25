@@ -12,7 +12,7 @@ export default function TraineeDashboard() {
       <div className="flex-1">
         <TraineeHeader />
 
-        <main className="p-6">
+        <main className="ml-64 p-6">
           {/* Hero Section */}
           <div className="w-full h-[540px] bg-gradient-to-r from-[rgba(13,170,188,.8)] to-[rgba(13,170,188,1)] rounded-xl text-white mb-20">
             <div className="flex items-center justify-between  rounded-2xl w-full h-full">

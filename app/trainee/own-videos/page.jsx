@@ -12,7 +12,7 @@ export default function OwnVideos() {
         <TraineeHeader className="h-16" />
 
         {/* Main content -> screen - header */}
-        <main className="flex-1 p-6 overflow-hidden">
+        <main className="ml-64 flex-1 p-6 overflow-hidden">
           {/* Purchased Section */}
           <div className="px-6 mb-8">
             <div className="flex items-center mb-4">

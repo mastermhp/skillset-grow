@@ -26,15 +26,15 @@ const additionalNav = [
 
 export default function TraineeSidebar({ currentPath = "/trainee/dashboard" }) {
   return (
-    <div className="w-64 bg-[#2b3445] min-h-screen flex flex-col">
+    <div className="fixed left-0 top-0 h-screen w-64 bg-[#2b3445] flex flex-col">
       {/* Logo */}
       <div className="p-6 border-b border-gray-600">
-        <h1 className="text-white font-bold text-lg">SKILLSETGROW</h1>
+        <h1 className="text-white font-bold text-lg">SKILLSET|GROW</h1>
         <p className="text-gray-400 text-sm mt-1">TRAINEE</p>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-4 py-6">
+      <nav className="flex-1 px-4 py-6 overflow-y-auto">
         <ul className="space-y-2">
           {navigation.map((item) => {
             const Icon = item.icon
@@ -44,7 +44,9 @@ export default function TraineeSidebar({ currentPath = "/trainee/dashboard" }) {
                 <Link
                   href={item.href}
                   className={`flex items-center px-4 py-3 text-sm rounded-lg transition-colors ${
-                    isActive ? "bg-[#4e97fd] text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                    isActive
+                      ? "bg-[#4e97fd] text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white"
                   }`}
                 >
                   <Icon className="w-5 h-5 mr-3" />
@@ -66,7 +68,9 @@ export default function TraineeSidebar({ currentPath = "/trainee/dashboard" }) {
                   <Link
                     href={item.href}
                     className={`flex items-center px-4 py-3 text-sm rounded-lg transition-colors ${
-                      isActive ? "bg-[#4e97fd] text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                      isActive
+                        ? "bg-[#4e97fd] text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white"
                     }`}
                   >
                     <Icon className="w-5 h-5 mr-3" />

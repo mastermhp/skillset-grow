@@ -13,7 +13,7 @@ export default function TrainingCompany() {
         <TraineeHeader className="h-16" />
 
         {/* Main content -> screen - header */}
-        <main className="flex-1 p-6 overflow-hidden">
+        <main className="ml-64 flex-1 p-6 overflow-hidden">
           {/* profile section  */}
           <section className="relative overflow-hidden w-full h-[620px]">
             <div className="absolute inset-0 bg-gradient-to-r from-[#230B34CC] to-[#230B344D] mb-18">
