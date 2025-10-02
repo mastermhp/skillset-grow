@@ -41,17 +41,33 @@ export async function POST(request) {
       role: user.role,
     })
 
+    const userResponse = {
+      id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+      role: user.role,
+      profileImage: user.profileImage,
+      subscription: user.subscription,
+    }
+
+    // Add role-specific fields
+    if (user.role === "trainer") {
+      userResponse.companyId = user.companyId
+      userResponse.expertise = user.expertise
+      userResponse.experience = user.experience
+      userResponse.certifications = user.certifications
+      userResponse.videoCallSlots = user.videoCallSlots
+    } else if (user.role === "company") {
+      userResponse.companyName = user.companyName
+      userResponse.industry = user.industry
+      userResponse.companySize = user.companySize
+      userResponse.website = user.website
+    }
+
     return NextResponse.json({
       message: "Login successful",
       token,
-      user: {
-        id: user._id,
-        fullName: user.fullName,
-        email: user.email,
-        role: user.role,
-        profileImage: user.profileImage,
-        subscription: user.subscription,
-      },
+      user: userResponse,
     })
   } catch (error) {
     console.error("[v0] Signin error:", error)

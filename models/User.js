@@ -57,6 +57,16 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    companyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    certificate: {
+      url: String,
+      publicId: String,
+    },
+    serviceType: String,
+    availableTimeSlots: [String],
     // Company specific fields
     companyName: String,
     companyLogo: {
@@ -64,6 +74,19 @@ const UserSchema = new mongoose.Schema(
       publicId: String,
     },
     companyDescription: String,
+    industry: String,
+    companySize: {
+      type: String,
+      enum: ["1-10", "11-50", "51-200", "201-500", "501-1000", "1000+"],
+    },
+    location: String,
+    website: String,
+    // Training certificate for companies
+    trainingCertificate: {
+      url: String,
+      publicId: String,
+    },
+    services: [String],
     // Subscription
     subscription: {
       isActive: {

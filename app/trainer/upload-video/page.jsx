@@ -74,6 +74,10 @@ export default function UploadVideo() {
       }
       const user = JSON.parse(userStr)
 
+      if (!user.companyId) {
+        throw new Error("Please complete your profile with company information before uploading videos")
+      }
+
       // Upload video file
       setUploadProgress(20)
       const videoUpload = await apiClient.uploadFile(videoFile, "skillset-grow/videos")
@@ -96,7 +100,7 @@ export default function UploadVideo() {
           publicId: thumbnailUpload.publicId,
         },
         trainerId: user._id,
-        companyId: user._id, // Using trainer's ID as company for self-employed trainers
+        companyId: user.companyId, // Use the trainer's associated company
       }
 
       await apiClient.createTrainingModule(moduleData)
@@ -104,6 +108,7 @@ export default function UploadVideo() {
       setUploadProgress(100)
       router.push("/trainer/dashboard")
     } catch (err) {
+      console.error("[v0] Upload error:", err)
       const errorMessage = err.message || "Failed to upload video"
       setError(errorMessage)
     } finally {

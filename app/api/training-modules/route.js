@@ -40,7 +40,22 @@ export async function POST(request) {
     await connectDB()
 
     const body = await request.json()
-    const { title, description, category, companyId, trainerId, duration, price } = body
+    const { title, description, category, companyId, trainerId, duration, price, videoUrl, thumbnail } = body
+
+    console.log("[v0] Creating training module with data:", {
+      title,
+      category,
+      companyId,
+      trainerId,
+      duration,
+      price,
+      hasVideoUrl: !!videoUrl,
+      hasThumbnail: !!thumbnail,
+    })
+
+    if (!companyId) {
+      return NextResponse.json({ error: "Company ID is required" }, { status: 400 })
+    }
 
     const module = await TrainingModule.create({
       title,
@@ -50,7 +65,21 @@ export async function POST(request) {
       trainer: trainerId,
       duration,
       price: price || 0,
+      thumbnail,
+      videos: videoUrl
+        ? [
+            {
+              title: title,
+              url: videoUrl,
+              duration: duration * 60, // Convert minutes to seconds
+              order: 1,
+            },
+          ]
+        : [],
+      isPublished: true, // Auto-publish uploaded videos
     })
+
+    console.log("[v0] Training module created successfully:", module._id)
 
     return NextResponse.json(
       {
@@ -61,6 +90,6 @@ export async function POST(request) {
     )
   } catch (error) {
     console.error("[v0] Create training module error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    return NextResponse.json({ error: error.message || "Internal server error" }, { status: 500 })
   }
 }
