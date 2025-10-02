@@ -1,53 +1,133 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { apiClient } from "@/lib/api-client"
 
 export default function TrainingCompanySignIn() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  })
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+  const router = useRouter()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setError("")
+
+    try {
+      const response = await apiClient.signin({
+        email: formData.email,
+        password: formData.password,
+        role: "company",
+      })
+
+      apiClient.setToken(response.token)
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("user", JSON.stringify(response.user))
+      }
+
+      router.push("/training-company/dashboard")
+    } catch (err) {
+      setError(err.message || "Failed to sign in")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleChange = (e) => {
+    const { id, value, type, checked } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [id]: type === "checkbox" ? checked : value,
+    }))
+  }
+
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Sign In Form */}
       <div className="flex-1 bg-white flex items-center justify-center p-8">
         <div className="w-full max-w-md space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-2xl font-semibold text-[#4e97fd]">Sign In</h2>
+          <div className="space-y-2">
+            <h2 className="text-3xl font-semibold text-[#4e97fd]">Sign in</h2>
           </div>
 
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            {error && (
+              <div className="p-3 bg-red-50 border border-red-200 rounded-md text-red-600 text-sm">{error}</div>
+            )}
+
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm text-gray-700">
                 Email
               </Label>
-              <Input id="email" type="email" placeholder="Enter your email" className="h-12 border-gray-200" />
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                className="h-12 border-gray-200 rounded-lg"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="password" className="text-sm text-gray-700">
                 Password
               </Label>
-              <Input id="password" type="password" placeholder="Enter your password" className="h-12 border-gray-200" />
+              <Input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                className="h-12 border-gray-200 rounded-lg"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
             </div>
 
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <input type="checkbox" id="remember" className="rounded" />
-                <Label htmlFor="remember" className="text-sm text-gray-600">
+                <input
+                  type="checkbox"
+                  id="rememberMe"
+                  className="rounded border-gray-300"
+                  checked={formData.rememberMe}
+                  onChange={handleChange}
+                />
+                <Label htmlFor="rememberMe" className="text-sm text-gray-600 cursor-pointer">
                   Remember me
                 </Label>
               </div>
               <Link href="#" className="text-sm text-[#4e97fd] hover:underline">
-                Forgot Password?
+                Forgot password?
               </Link>
             </div>
 
-            <Button className="w-full h-12 bg-[#2b3445] hover:bg-[#374151] text-white">Sign In</Button>
+            <Button
+              type="submit"
+              className="w-full h-12 bg-[#2b3445] hover:bg-[#374151] text-white rounded-[30px]"
+              disabled={loading}
+            >
+              {loading ? "Signing in..." : "Sign in"}
+            </Button>
           </form>
 
           <div className="text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{" "}
-              <Link href="/signup/training-company" className="text-[#4e97fd] hover:underline">
-                Sign up
+              <Link href="/signup/training-company" className="text-[#4e97fd] hover:underline font-medium">
+                Create an account
               </Link>
             </p>
           </div>
@@ -56,30 +136,18 @@ export default function TrainingCompanySignIn() {
 
       {/* Right Side - Welcome Section */}
       <div className="flex-1 bg-[#2b3445] flex items-center justify-center p-8 relative overflow-hidden">
-        <div className="text-center z-10">
-          <h1 className="text-4xl font-bold text-white mb-4">
+        <div className="text-center z-10 max-w-md">
+          <h1 className="text-4xl font-bold text-white leading-tight">
             Let's start as
             <br />
-            Training Company
+            Trainee amazing
             <br />
-            amazing journey with us
+            journey with us
           </h1>
         </div>
 
-        {/* 3D Shapes */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 translate-x-8 translate-y-4">
-            <div className="w-48 h-48 rounded-full gradient-orange-pink opacity-90 blur-sm"></div>
-          </div>
-          <div className="absolute bottom-20 right-20">
-            <div className="w-24 h-24 rounded-full gradient-purple-blue opacity-80"></div>
-          </div>
-          <div className="absolute top-32 right-32">
-            <div className="w-16 h-16 rounded-full gradient-blue-purple opacity-75"></div>
-          </div>
-          <div className="absolute top-1/2 right-0 transform translate-x-12 -translate-y-1/2">
-            <div className="w-32 h-64 bg-gradient-to-b from-gray-400 to-gray-600 opacity-60 rounded-full transform rotate-45"></div>
-          </div>
+        <div className="absolute inset-0 pointer-events-none">
+          <img src="/Frame.png" alt="" className="absolute right-0 bottom-0" />
         </div>
       </div>
     </div>

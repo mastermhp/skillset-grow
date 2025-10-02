@@ -1,8 +1,47 @@
-import TraineeHeader from "@/components/trainee-header";
-import { ChevronDown } from "lucide-react";
-import TrainingCompanySidebar from "../../../components/training-company-sidebar";
+"use client"
+
+import TraineeHeader from "@/components/trainee-header"
+import { ChevronDown } from "lucide-react"
+import TrainingCompanySidebar from "../../../components/training-company-sidebar"
+import { useState, useEffect } from "react"
+import { apiClient } from "@/lib/api-client"
 
 export default function TrainingCompanyDashboard() {
+  const [stats, setStats] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchDashboardStats()
+  }, [])
+
+  const fetchDashboardStats = async () => {
+    try {
+      setLoading(true)
+      const response = await apiClient.getDashboardStats("company")
+      setStats(response.stats)
+    } catch (error) {
+      console.error("[v0] Failed to fetch dashboard stats:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen bg-gray-50">
+        <TrainingCompanySidebar currentPath="/training-company/dashboard" />
+        <div className="flex-1">
+          <TraineeHeader />
+          <main className="ml-64 p-6">
+            <div className="text-center py-12">
+              <p className="text-gray-500">Loading dashboard...</p>
+            </div>
+          </main>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       <TrainingCompanySidebar currentPath="/training-company/dashboard" />
@@ -16,10 +55,8 @@ export default function TrainingCompanyDashboard() {
               {/* Total Revenue Section */}
               <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
                 <div className="mb-6">
-                  <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-                    Total revenue
-                  </h2>
-                  <p className="text-3xl font-bold text-blue-500">$22,323</p>
+                  <h2 className="text-2xl font-semibold text-gray-900 mb-2">Total revenue</h2>
+                  <p className="text-3xl font-bold text-blue-500">${stats?.totalRevenue?.toLocaleString() || "0"}</p>
                 </div>
 
                 {/* Legend */}
@@ -41,34 +78,19 @@ export default function TrainingCompanyDashboard() {
                 {/* Bar Chart */}
                 <div className="relative h-64">
                   <div className="flex items-end justify-between h-full space-x-2">
-                    {[
-                      { height: "h-32", color: "bg-gray-300", month: "Jan" },
-                      { height: "h-20", color: "bg-blue-500", month: "Feb" },
-                      { height: "h-16", color: "bg-gray-300", month: "Mar" },
-                      { height: "h-12", color: "bg-gray-300", month: "Apr" },
-                      { height: "h-48", color: "bg-purple-500", month: "May" },
-                      { height: "h-8", color: "bg-gray-300", month: "Jun" },
-                      { height: "h-28", color: "bg-gray-300", month: "Jul" },
-                      { height: "h-24", color: "bg-gray-300", month: "Aug" },
-                      { height: "h-4", color: "bg-gray-300", month: "Sep" },
-                      { height: "h-40", color: "bg-green-500", month: "Oct" },
-                      { height: "h-20", color: "bg-gray-300", month: "Nov" },
-                      { height: "h-16", color: "bg-gray-300", month: "Dec" },
-                    ].map((bar, index) => (
-                      <div key={index} className="flex flex-col items-center">
-                        <div
-                          className={`w-8 ${bar.height} ${bar.color} rounded-t-sm mb-2`}
-                        ></div>
-                        <span className="text-xs text-gray-500">
-                          {bar.month}
-                        </span>
-                      </div>
-                    ))}
+                    {stats?.monthlyRevenue?.map((data, index) => {
+                      const total = data.call + data.videoCall + data.videos
+                      const maxHeight = 200
+                      const height = (total / 3000) * maxHeight
+
+                      return (
+                        <div key={index} className="flex flex-col items-center">
+                          <div className={`w-8 bg-blue-500 rounded-t-sm mb-2`} style={{ height: `${height}px` }}></div>
+                          <span className="text-xs text-gray-500">{data.month}</span>
+                        </div>
+                      )
+                    })}
                   </div>
-                  {/* Chart dots */}
-                  <div className="absolute top-8 left-8 w-2 h-2 bg-purple-400 rounded-full"></div>
-                  <div className="absolute top-32 left-32 w-2 h-2 bg-blue-400 rounded-full"></div>
-                  <div className="absolute top-24 right-32 w-2 h-2 bg-green-400 rounded-full"></div>
                 </div>
               </div>
 
@@ -77,13 +99,9 @@ export default function TrainingCompanyDashboard() {
                 {/* Total Trainer Section */}
                 <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-semibold text-gray-900">
-                      Total Trainer
-                    </h2>
+                    <h2 className="text-2xl font-semibold text-gray-900">Total Trainer</h2>
                     <div className="flex items-center space-x-2 bg-gray-100 rounded-lg px-3 py-2">
-                      <span className="text-sm text-gray-600">
-                        Select Filter
-                      </span>
+                      <span className="text-sm text-gray-600">Select Filter</span>
                       <ChevronDown className="w-4 h-4 text-gray-500" />
                     </div>
                   </div>
@@ -91,19 +109,9 @@ export default function TrainingCompanyDashboard() {
                   {/* Circular Progress Chart */}
                   <div className="flex items-center justify-center">
                     <div className="relative w-48 h-48">
-                      <svg
-                        className="w-full h-full transform -rotate-90"
-                        viewBox="0 0 100 100"
-                      >
+                      <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                         {/* Background circle */}
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="40"
-                          stroke="#e5e7eb"
-                          strokeWidth="8"
-                          fill="none"
-                        />
+                        <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="8" fill="none" />
                         {/* Progress circle */}
                         <circle
                           cx="50"
@@ -117,13 +125,7 @@ export default function TrainingCompanyDashboard() {
                           strokeLinecap="round"
                         />
                         <defs>
-                          <linearGradient
-                            id="gradient1"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="0%"
-                          >
+                          <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stopColor="#8b5cf6" />
                             <stop offset="100%" stopColor="#3b82f6" />
                           </linearGradient>
@@ -131,7 +133,7 @@ export default function TrainingCompanyDashboard() {
                       </svg>
                       <div className="absolute inset-0 flex flex-col items-center justify-center">
                         <span className="text-3xl font-bold text-purple-600">
-                          5,000
+                          {stats?.totalTrainers?.toLocaleString() || "0"}
                         </span>
                         <span className="text-sm text-purple-500">Today</span>
                       </div>
@@ -142,13 +144,9 @@ export default function TrainingCompanyDashboard() {
                 {/* Trainer Info Section */}
                 <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-semibold text-gray-900">
-                      Trainer Info
-                    </h2>
+                    <h2 className="text-2xl font-semibold text-gray-900">Trainer Info</h2>
                     <div className="flex items-center space-x-2 bg-gray-100 rounded-lg px-3 py-2">
-                      <span className="text-sm text-gray-600">
-                        Select filter
-                      </span>
+                      <span className="text-sm text-gray-600">Select filter</span>
                       <ChevronDown className="w-4 h-4 text-gray-500" />
                     </div>
                   </div>
@@ -156,20 +154,8 @@ export default function TrainingCompanyDashboard() {
                   {/* Donut Chart */}
                   <div className="flex items-center justify-center mb-6">
                     <div className="relative w-48 h-48">
-                      <svg
-                        className="w-full h-full transform -rotate-90"
-                        viewBox="0 0 100 100"
-                      >
-                        {/* Background circle */}
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="35"
-                          stroke="#e5e7eb"
-                          strokeWidth="16"
-                          fill="none"
-                        />
-                        {/* Purple segment (Total) */}
+                      <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="35" stroke="#e5e7eb" strokeWidth="16" fill="none" />
                         <circle
                           cx="50"
                           cy="50"
@@ -181,7 +167,6 @@ export default function TrainingCompanyDashboard() {
                           strokeDashoffset="0"
                           strokeLinecap="round"
                         />
-                        {/* Orange segment (Inactive) */}
                         <circle
                           cx="50"
                           cy="50"
@@ -193,7 +178,6 @@ export default function TrainingCompanyDashboard() {
                           strokeDashoffset="-109.9"
                           strokeLinecap="round"
                         />
-                        {/* Blue segment (Active) */}
                         <circle
                           cx="50"
                           cy="50"
@@ -207,9 +191,7 @@ export default function TrainingCompanyDashboard() {
                         />
                       </svg>
                       <div className="absolute inset-0 flex flex-col items-center justify-center">
-                        <span className="text-3xl font-bold text-purple-600">
-                          500
-                        </span>
+                        <span className="text-3xl font-bold text-purple-600">{stats?.totalTrainers || "0"}</span>
                         <span className="text-sm text-gray-500">(30 days)</span>
                       </div>
                     </div>
@@ -219,15 +201,15 @@ export default function TrainingCompanyDashboard() {
                   <div className="flex items-center justify-center space-x-6">
                     <div className="flex items-center space-x-2">
                       <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                      <span className="text-sm text-gray-600">Total</span>
+                      <span className="text-sm text-gray-600">Total: {stats?.totalTrainers || 0}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                      <span className="text-sm text-gray-600">Inactive</span>
+                      <span className="text-sm text-gray-600">Inactive: {stats?.inactiveTrainers || 0}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                      <span className="text-sm text-gray-600">Active</span>
+                      <span className="text-sm text-gray-600">Active: {stats?.activeTrainers || 0}</span>
                     </div>
                   </div>
                 </div>
@@ -237,5 +219,5 @@ export default function TrainingCompanyDashboard() {
         </main>
       </div>
     </div>
-  );
+  )
 }

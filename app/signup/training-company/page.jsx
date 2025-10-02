@@ -8,11 +8,13 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { apiClient } from "@/lib/api-client"
 
-export default function TraineeSignIn() {
+export default function TrainingCompanySignUp() {
   const [formData, setFormData] = useState({
+    companyName: "",
     email: "",
     password: "",
-    rememberMe: false,
+    confirmPassword: "",
+    terms: false,
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -23,11 +25,24 @@ export default function TraineeSignIn() {
     setLoading(true)
     setError("")
 
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match")
+      setLoading(false)
+      return
+    }
+
+    if (!formData.terms) {
+      setError("Please accept the Terms and Conditions")
+      setLoading(false)
+      return
+    }
+
     try {
-      const response = await apiClient.signin({
+      const response = await apiClient.signup({
+        companyName: formData.companyName,
         email: formData.email,
         password: formData.password,
-        role: "trainee",
+        role: "company",
       })
 
       apiClient.setToken(response.token)
@@ -36,9 +51,9 @@ export default function TraineeSignIn() {
         localStorage.setItem("user", JSON.stringify(response.user))
       }
 
-      router.push("/trainee/dashboard")
+      router.push("/training-company/dashboard")
     } catch (err) {
-      setError(err.message || "Failed to sign in")
+      setError(err.message || "Failed to create account")
     } finally {
       setLoading(false)
     }
@@ -54,17 +69,35 @@ export default function TraineeSignIn() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Left Side - Sign In Form */}
+      {/* Left Side - Sign Up Form */}
       <div className="flex-1 bg-white flex items-center justify-center p-8">
         <div className="w-full max-w-md space-y-8">
           <div className="space-y-2">
-            <h2 className="text-3xl font-semibold text-[#4e97fd]">Sign in</h2>
+            <h2 className="text-3xl font-semibold text-[#4e97fd]">Sign up</h2>
+            <p className="text-sm text-gray-500">
+              <span className="text-[#4e97fd] font-medium">Company</span> registration
+            </p>
           </div>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
               <div className="p-3 bg-red-50 border border-red-200 rounded-md text-red-600 text-sm">{error}</div>
             )}
+
+            <div className="space-y-2">
+              <Label htmlFor="companyName" className="text-sm text-gray-700">
+                Company Name
+              </Label>
+              <Input
+                id="companyName"
+                type="text"
+                placeholder="Enter your company name"
+                className="h-12 border-gray-200 rounded-lg"
+                value={formData.companyName}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm text-gray-700">
@@ -88,7 +121,7 @@ export default function TraineeSignIn() {
               <Input
                 id="password"
                 type="password"
-                placeholder="Enter your password"
+                placeholder="Create a password"
                 className="h-12 border-gray-200 rounded-lg"
                 value={formData.password}
                 onChange={handleChange}
@@ -96,22 +129,35 @@ export default function TraineeSignIn() {
               />
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  id="rememberMe"
-                  className="rounded border-gray-300"
-                  checked={formData.rememberMe}
-                  onChange={handleChange}
-                />
-                <Label htmlFor="rememberMe" className="text-sm text-gray-600 cursor-pointer">
-                  Remember me
-                </Label>
-              </div>
-              <Link href="#" className="text-sm text-[#4e97fd] hover:underline">
-                Forgot password?
-              </Link>
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword" className="text-sm text-gray-700">
+                Confirm Password
+              </Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="Confirm your password"
+                className="h-12 border-gray-200 rounded-lg"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="terms"
+                className="rounded border-gray-300"
+                checked={formData.terms}
+                onChange={handleChange}
+              />
+              <Label htmlFor="terms" className="text-sm text-gray-600 cursor-pointer">
+                I agree to the{" "}
+                <Link href="#" className="text-[#4e97fd] hover:underline">
+                  Terms & Conditions
+                </Link>
+              </Label>
             </div>
 
             <Button
@@ -119,15 +165,15 @@ export default function TraineeSignIn() {
               className="w-full h-12 bg-[#2b3445] hover:bg-[#374151] text-white rounded-[30px]"
               disabled={loading}
             >
-              {loading ? "Signing in..." : "Sign in"}
+              {loading ? "Creating Account..." : "Sign up"}
             </Button>
           </form>
 
           <div className="text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{" "}
-              <Link href="/signup/trainee" className="text-[#4e97fd] hover:underline font-medium">
-                Create an account
+              Already have an account?{" "}
+              <Link href="/signup/training-company" className="text-[#4e97fd] hover:underline font-medium">
+                Sign in
               </Link>
             </p>
           </div>
