@@ -42,7 +42,7 @@ export async function POST(request) {
     })
 
     const userResponse = {
-      id: user._id,
+      _id: user._id.toString(), // Use _id to match frontend expectations
       fullName: user.fullName,
       email: user.email,
       role: user.role,
@@ -62,6 +62,7 @@ export async function POST(request) {
       userResponse.industry = user.industry
       userResponse.companySize = user.companySize
       userResponse.website = user.website
+      userResponse.companyLogo = user.companyLogo
     }
 
     const response = NextResponse.json({

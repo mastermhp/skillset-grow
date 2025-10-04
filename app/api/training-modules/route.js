@@ -11,8 +11,15 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url)
     const category = searchParams.get("category")
     const companyId = searchParams.get("companyId")
+    const trainerId = searchParams.get("trainerId")
 
-    const query = { isPublished: true }
+    console.log("[v0] Fetching training modules with params:", { category, companyId, trainerId })
+
+    const query = {}
+
+    if (!trainerId && !companyId) {
+      query.isPublished = true
+    }
 
     if (category && category !== "All") {
       query.category = category
@@ -22,15 +29,23 @@ export async function GET(request) {
       query.company = companyId
     }
 
+    if (trainerId) {
+      query.trainer = trainerId
+    }
+
+    console.log("[v0] Query:", query)
+
     const modules = await TrainingModule.find(query)
-      .populate("company", "companyName companyLogo")
+      .populate("company", "companyName companyLogo profileImage fullName")
       .populate("trainer", "fullName profileImage rating")
       .sort({ createdAt: -1 })
 
-    return NextResponse.json({ modules })
+    console.log("[v0] Found modules:", modules.length)
+
+    return NextResponse.json({ success: true, modules })
   } catch (error) {
     console.error("[v0] Get training modules error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 })
   }
 }
 
@@ -62,7 +77,7 @@ export async function POST(request) {
       description,
       category,
       company: companyId,
-      trainer: trainerId,
+      trainer: trainerId || null,
       duration,
       price: price || 0,
       thumbnail,
@@ -90,6 +105,6 @@ export async function POST(request) {
     )
   } catch (error) {
     console.error("[v0] Create training module error:", error)
-    return NextResponse.json({ error: error.message || "Internal server error" }, { status: 500 })
+    return NextResponse.json({ success: false, error: error.message || "Internal server error" }, { status: 500 })
   }
 }

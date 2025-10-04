@@ -14,6 +14,7 @@ export default function TrainerDashboard() {
   const [trainers, setTrainers] = useState([])
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [activeCategory, setActiveCategory] = useState("Home")
   const router = useRouter()
 
   useEffect(() => {
@@ -126,11 +127,12 @@ export default function TrainerDashboard() {
             {/* Category Filters */}
             <div className="px-6 mb-6 mt-20">
               <div className="flex space-x-4 overflow-x-auto">
-                {["Home", "About", "Trainers", "Videos"].map((category, index) => (
+                {["Home", "About", "Trainers", "Videos"].map((category) => (
                   <button
                     key={category}
+                    onClick={() => setActiveCategory(category)}
                     className={`px-5 py-3 rounded-[12px] text-md font-semibold whitespace-nowrap ${
-                      index === 0 ? "bg-gray-800 text-white" : "text-gray-700 hover:bg-gray-300"
+                      activeCategory === category ? "bg-gray-800 text-white" : "text-gray-700 hover:bg-gray-300"
                     }`}
                   >
                     {category}

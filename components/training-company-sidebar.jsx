@@ -12,6 +12,7 @@ import {
   Settings2,
   Users,
   DollarSignIcon,
+  TimerResetIcon,
 } from "lucide-react";
 
 const navigation = [
@@ -25,6 +26,11 @@ const navigation = [
     name: "Trainers",
     href: "/training-company/trainers",
     icon: Users,
+  },
+  {
+    name: "Shifts",
+    href: "/training-company/shifts",
+    icon: TimerResetIcon,
   },
   {
     name: "Trainers Payment",
