@@ -35,7 +35,7 @@ export async function POST(request) {
     }
 
     // Generate token
-    const token = generateToken({
+    const token = await generateToken({
       userId: user._id,
       email: user.email,
       role: user.role,
@@ -64,11 +64,21 @@ export async function POST(request) {
       userResponse.website = user.website
     }
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       message: "Login successful",
       token,
       user: userResponse,
     })
+
+    response.cookies.set("auth-token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 30 * 24 * 60 * 60, // 30 days
+      path: "/",
+    })
+
+    return response
   } catch (error) {
     console.error("[v0] Signin error:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })

@@ -23,12 +23,18 @@ export default function TraineeSignIn() {
     setLoading(true)
     setError("")
 
+    console.log("[v0] Starting signin process for trainee")
+    console.log("[v0] Email:", formData.email)
+
     try {
+      console.log("[v0] Calling apiClient.signin...")
       const response = await apiClient.signin({
         email: formData.email,
         password: formData.password,
         role: "trainee",
       })
+
+      console.log("[v0] Signin response received:", response)
 
       apiClient.setToken(response.token)
 
@@ -36,8 +42,10 @@ export default function TraineeSignIn() {
         localStorage.setItem("user", JSON.stringify(response.user))
       }
 
-      router.push("/trainee/dashboard")
+      console.log("[v0] Redirecting to trainee dashboard...")
+      window.location.href = "/trainee/dashboard"
     } catch (err) {
+      console.error("[v0] Signin error:", err)
       setError(err.message || "Failed to sign in")
     } finally {
       setLoading(false)
